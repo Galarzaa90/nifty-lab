@@ -22,7 +22,8 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Nifty Lab",
     short_name: "Nifty Lab",
-    description: "Compare everyday items by their true unit price.",
+    description:
+      "Quick calculators for every day use.",
     start_url: startUrl,
     scope: startUrl,
     display: "standalone",

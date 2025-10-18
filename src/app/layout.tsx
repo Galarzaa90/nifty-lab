@@ -15,8 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nifty Lab | Unit Price Calculator",
-  description: "Compare everyday items by their true unit price.",
+  title: {
+    default: "Nifty Lab | Everyday Calculators",
+    template: "%s | Nifty Lab",
+  },
+  description:
+    "Quick calculators for every day use.",
 };
 
 export default function RootLayout({
