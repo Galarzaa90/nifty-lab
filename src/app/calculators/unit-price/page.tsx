@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  Badge,
+  ActionIcon,
   Button,
   Card,
   Group,
@@ -9,12 +9,17 @@ import {
   Select,
   SimpleGrid,
   Stack,
-  ThemeIcon,
+  Text,
   Title,
   type ComboboxData,
-  type ComboboxItem
+  type ComboboxItem,
 } from "@mantine/core";
-import { IconCurrencyDollar, IconTrash, IconX } from "@tabler/icons-react";
+import {
+  IconCurrencyDollar,
+  IconPlus,
+  IconScale,
+  IconTrash,
+} from "@tabler/icons-react";
 import { useMemo, useState } from "react";
 
 type MeasurementKey = "units" | "volume" | "weight" | "length";
@@ -508,58 +513,65 @@ export default function Home() {
   };
 
   return (
-    <Stack gap="lg">
-      <Title order={1}>Unit price calculator</Title>
+    <Stack gap="xl">
+      <Stack gap="sm">
+        <Text className="page-kicker">Price comparison</Text>
+        <Title order={1} className="section-title">
+          Unit price calculator
+        </Title>
+        <Text className="lede">
+          Compare packages with different sizes and units. Once you choose a
+          measurement type, the remaining rows stay in the same family.
+        </Text>
+      </Stack>
       <Stack gap="lg">
         {products.map((product, index) => {
           const normalized = normalizedProducts[index];
           const selectData = getSelectDataForIndex(index);
           const isCheapest = cheapestInfo.cheapestIndices.includes(index);
-          const cardBorderColor = isCheapest
-            ? "var(--mantine-color-teal-4)"
-            : undefined;
-          const badgeColor = normalized
-            ? isCheapest
-              ? "teal"
-              : "gray"
-            : "gray";
 
           return (
             <Card
               key={`product-${index}`}
-              withBorder
-              shadow="sm"
-              radius="lg"
-              p="lg"
-              style={
-                cardBorderColor ? { borderColor: cardBorderColor } : undefined
-              }
+              className="tool-card calculator-row"
+              data-winning={isCheapest}
+              p={{ base: "md", sm: "lg" }}
             >
               <Stack gap="md">
                 <Group gap="xs" justify="space-between">
-                  <Group gap="xs" align="center">
+                  <Stack gap={3}>
+                    <Text className="meta-label">
+                      Product {(index + 1).toString().padStart(2, "0")}
+                    </Text>
                     {normalized ? (
-                      <Badge color={badgeColor} variant="light" radius="sm">
-                        {`${currencyFormatter.format(normalized.pricePerBase)} / ${normalized.baseUnitLabel
-                          }`}
-                      </Badge>
-                    ) : null}
+                      <Text ff="monospace" fw={760}>
+                        {`${currencyFormatter.format(
+                          normalized.pricePerBase
+                        )} / ${normalized.baseUnitLabel}`}
+                      </Text>
+                    ) : (
+                      <Text size="sm" className="quiet-text">
+                        Waiting for price, amount, and unit
+                      </Text>
+                    )}
+                  </Stack>
+                  <Group gap="xs">
                     {isCheapest && normalized ? (
-                      <Badge color="teal" variant="filled" radius="sm">
-                        Cheapest
-                      </Badge>
+                      <span className="stat-chip" data-tone="success">
+                        Best value
+                      </span>
+                    ) : null}
+                    {products.length > 2 ? (
+                      <ActionIcon
+                        color="red"
+                        variant="outline"
+                        aria-label={`Remove product ${index + 1}`}
+                        onClick={() => handleRemoveProduct(index)}
+                      >
+                        <IconTrash size={17} />
+                      </ActionIcon>
                     ) : null}
                   </Group>
-                  {products.length > 2 ?
-                    <ThemeIcon
-                      variant="outline"
-                      aria-label="Remove product"
-                      onClick={() => handleRemoveProduct(index)}
-                    >
-                      <IconTrash />
-                    </ThemeIcon> : null
-                  }
-
                 </Group>
 
                 <SimpleGrid
@@ -581,7 +593,7 @@ export default function Home() {
                   />
                   <NumberInput
                     label="Amount"
-                    leftSection={<IconX />}
+                    leftSection={<IconScale size={18} />}
                     placeholder="0"
                     value={product.amount}
                     min={0}
@@ -611,11 +623,12 @@ export default function Home() {
       </Stack>
 
       <Button
-        variant="light"
+        variant="filled"
+        color="dark"
         size="md"
-        leftSection="+"
+        className="mobile-wide-action"
+        leftSection={<IconPlus size={17} />}
         onClick={handleAddProduct}
-        style={{ alignSelf: "flex-start" }}
       >
         Add product
       </Button>

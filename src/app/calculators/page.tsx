@@ -1,46 +1,49 @@
-"use client"
+"use client";
+
 import { CALCULATORS } from "@/data/calculators";
-import { Badge, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { Card, Group, Stack, Text, Title } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function CalculatorsIndex() {
   return (
     <Stack gap="xl">
-      <Stack gap="xs">
-        <Title order={1}>Pick a calculator</Title>
-        <Text c="dimmed">
-          Select a tool from the list to get started.
+      <Stack gap="sm">
+        <Text className="page-kicker">Tool library</Text>
+        <Title order={1} className="section-title">
+          Pick a calculator
+        </Title>
+        <Text className="lede">
+          Select a focused calculator and keep the inputs visible while you work.
         </Text>
       </Stack>
 
       <Stack gap="md">
-        {CALCULATORS.map((calculator) => (
+        {CALCULATORS.map((calculator, index) => (
           <Card
             key={calculator.slug}
-            withBorder
-            radius="lg"
+            className="tool-link"
             p="lg"
             component={Link}
             href={calculator.href}
-            shadow="sm"
-            style={{ textDecoration: "none" }}
+            shadow="none"
           >
             <Stack gap="sm">
-              <Group justify="space-between" gap="xs">
-                <Title order={3} size="1.5rem">
-                  {calculator.name}
-                </Title>
-                <IconArrowRight size={20} />
+              <Group justify="space-between" gap="xs" wrap="nowrap">
+                <Group gap="md" wrap="nowrap">
+                  <Text ff="monospace" size="sm" className="quiet-text">
+                    {(index + 1).toString().padStart(2, "0")}
+                  </Text>
+                  <Stack gap={3}>
+                    <Title order={3} size="1.35rem">
+                      {calculator.name}
+                    </Title>
+                    <Text className="meta-label">{calculator.eyebrow}</Text>
+                  </Stack>
+                </Group>
+                <IconArrowRight size={20} stroke={1.8} />
               </Group>
-              <Text c="dimmed">{calculator.shortDescription}</Text>
-              <Group gap={6}>
-                {calculator.tags.map((tag) => (
-                  <Badge key={tag} variant="light" color="gray" size="sm">
-                    {tag}
-                  </Badge>
-                ))}
-              </Group>
+              <Text className="quiet-text">{calculator.shortDescription}</Text>
             </Stack>
           </Card>
         ))}

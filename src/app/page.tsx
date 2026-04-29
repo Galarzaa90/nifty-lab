@@ -1,86 +1,90 @@
-import Link from "next/link";
-import {
-  Anchor,
-  Badge,
-  Card,
-  Container,
-  Flex,
-  Group,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import { IconArrowRight, IconSparkles } from "@tabler/icons-react";
 import { CALCULATORS } from "@/data/calculators";
+import { Card, Container, Group, Stack, Text, Title } from "@mantine/core";
+import { IconArrowRight } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <Container size="lg" py={{ base: "xl", md: "3xl" }}>
-      <Stack gap="xl">
-        <Badge
-          leftSection={<IconSparkles size={14} />}
-          size="lg"
-          radius="xl"
-          variant="light"
-          maw={200}
-        >
-          Nifty Lab
-        </Badge>
-
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          gap={{ base: "xl", md: "3xl" }}
-          align="stretch"
-        >
-          <Card
-            withBorder
-            radius="lg"
-            p="lg"
-            shadow="sm"
-            style={{
-              flexShrink: 0,
-              flexBasis: "min(280px, 100%)",
-            }}
-          >
-            <Stack gap="md">
-              <Text fw={600} size="sm" c="dimmed" tt="uppercase">
-                Nifty Lab
-              </Text>
+    <main className="app-shell">
+      <Container size="xl" py={{ base: "md", md: "xl" }}>
+        <div className="directory-shell">
+          <aside className="directory-sidebar">
+            <Stack gap="xl">
+              <span className="brand-mark">Nifty Lab</span>
+              <Stack gap="md">
+                <Text className="sidebar-group-title">Greatest hits</Text>
+                <Stack gap="xs">
+                  {CALCULATORS.map((calculator) => (
+                    <Link
+                      key={calculator.slug}
+                      className="mini-link"
+                      href={calculator.href}
+                    >
+                      <Text size="sm" fw={650}>
+                        {calculator.name}
+                      </Text>
+                    </Link>
+                  ))}
+                </Stack>
+              </Stack>
               <Stack gap={4}>
+                <Text className="sidebar-group-title">Notes</Text>
+                <Text size="sm" className="quiet-text">
+                  No accounts. No saved data. Just local calculations.
+                </Text>
+              </Stack>
+            </Stack>
+          </aside>
+
+          <Stack className="directory-main" gap={44} py={{ md: "lg" }}>
+            <span className="brand-mark">Nifty Lab</span>
+            <Stack gap="lg" maw={760}>
+              <Title order={1} className="page-title">
+                Tiny calculators for ordinary decisions.
+              </Title>
+              <Text className="lede">
+                A small collection of low-friction tools for checkout math,
+                grocery comparisons, and the little numbers that interrupt your
+                day.
+              </Text>
+            </Stack>
+
+            <Stack gap="md">
+              <Group justify="space-between" align="end">
+                <Title order={2} size="1.35rem">
+                  Calculators
+                </Title>
+                <Text ff="monospace" size="xs" className="quiet-text">
+                  {CALCULATORS.length} tools
+                </Text>
+              </Group>
+              <div className="home-tool-grid">
                 {CALCULATORS.map((calculator) => (
                   <Card
                     key={calculator.slug}
-                    withBorder
-                    p="md"
-                    radius="md"
+                    className="tool-link"
+                    p="lg"
                     component={Link}
                     href={calculator.href}
                     shadow="none"
-                    style={{ textDecoration: "none" }}
                   >
-                    <Stack gap={6}>
-                      <Group justify="space-between" gap="xs">
-                        <Text fw={600}>{calculator.name}</Text>
-                        <IconArrowRight size={16} />
+                    <Stack gap="xs">
+                      <Group justify="space-between" wrap="nowrap">
+                        <Text className="meta-label">{calculator.eyebrow}</Text>
+                        <IconArrowRight size={17} stroke={1.8} />
                       </Group>
-                      <Text size="sm" c="dimmed">
+                      <Text fw={720}>{calculator.name}</Text>
+                      <Text size="sm" className="quiet-text">
                         {calculator.shortDescription}
                       </Text>
-                      <Group gap={6}>
-                        {calculator.tags.map((tag) => (
-                          <Badge key={tag} variant="light" color="gray" size="sm">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </Group>
                     </Stack>
                   </Card>
                 ))}
-              </Stack>
+              </div>
             </Stack>
-          </Card>
-        </Flex>
-      </Stack>
-    </Container>
+          </Stack>
+        </div>
+      </Container>
+    </main>
   );
 }

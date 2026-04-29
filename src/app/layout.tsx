@@ -1,6 +1,6 @@
 import "@mantine/core/styles.css";
 import type { Metadata } from "next";
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,6 +14,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const theme = createTheme({
+  primaryColor: "violet",
+  defaultRadius: "sm",
+  fontFamily: "var(--font-geist-sans)",
+  fontFamilyMonospace: "var(--font-geist-mono)",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Nifty Lab | Everyday Calculators",
@@ -21,6 +28,10 @@ export const metadata: Metadata = {
   },
   description:
     "Quick calculators for every day use.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icons/icon-180.png",
+  },
 };
 
 export default function RootLayout({
@@ -31,12 +42,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript defaultColorScheme="auto" />
+        <ColorSchemeScript defaultColorScheme="dark" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MantineProvider defaultColorScheme="auto">{children}</MantineProvider>
+        <MantineProvider defaultColorScheme="dark" theme={theme}>
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

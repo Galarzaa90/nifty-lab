@@ -2,7 +2,6 @@
 
 import {
   ActionIcon,
-  Badge,
   Button,
   Card,
   Divider,
@@ -146,19 +145,22 @@ export default function DiscountCalculatorPage() {
 
   return (
     <Stack gap="xl">
-      <Stack gap="xs">
-        <Title order={1}>Discount calculator</Title>
-        <Text c="dimmed">
+      <Stack gap="sm">
+        <Text className="page-kicker">Checkout math</Text>
+        <Title order={1} className="section-title">
+          Discount calculator
+        </Title>
+        <Text className="lede">
           Combine multiple discounts to see the true final price and how much you
           save.
         </Text>
       </Stack>
 
-      <Card withBorder radius="lg" p="lg" shadow="sm">
+      <Card className="tool-card" p={{ base: "md", sm: "lg" }}>
         <Stack gap="lg">
           <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={{ base: "md", sm: "lg" }}>
             <NumberInput
-              label="Original Price"
+              label="Original price"
               placeholder="0.00"
               leftSection={<IconCurrencyDollar />}
               value={originalPrice}
@@ -211,11 +213,12 @@ export default function DiscountCalculatorPage() {
               </Group>
             ))}
             <Button
-              variant="light"
+              variant="outline"
+              color="dark"
               size="sm"
+              className="mobile-wide-action"
               leftSection={<IconPlus size={16} />}
               onClick={handleAddAdditional}
-              style={{ alignSelf: "flex-start" }}
             >
               Add another discount
             </Button>
@@ -223,30 +226,31 @@ export default function DiscountCalculatorPage() {
         </Stack>
       </Card>
 
-      <Card withBorder radius="lg" p="lg" shadow="sm">
+      <Card
+        className={result ? "result-card" : "tool-card"}
+        p={{ base: "md", sm: "lg" }}
+      >
         <Stack gap="md">
           {result ? (
             <>
-              <Group justify="space-between" align="flex-end">
+              <Group justify="space-between" align="flex-end" gap="lg">
                 <Stack gap={4}>
-                  <Text size="sm" c="dimmed">
+                  <Text size="sm" className="result-muted">
                     Final price
                   </Text>
-                  <Text size="lg">
+                  <Text className="result-number">
                     {currencyFormatter.format(result.finalPrice)}
                   </Text>
                 </Stack>
-                <Badge
-                  color={result.totalSavings > 0 ? "teal" : "gray"}
-                  size="lg"
-                  radius="sm"
-                  variant={result.totalSavings > 0 ? "filled" : "light"}
+                <span
+                  className="stat-chip"
+                  data-tone={result.totalSavings > 0 ? "success" : undefined}
                 >
                   {formatPercent(result.effectiveDiscount)} off
-                </Badge>
+                </span>
               </Group>
 
-              <Text c="dimmed">
+              <Text className="result-muted">
                 You save {currencyFormatter.format(result.totalSavings)}.
               </Text>
 
@@ -254,21 +258,26 @@ export default function DiscountCalculatorPage() {
                 <>
                   <Divider />
                   <Stack gap="sm">
-                    <Text size="sm" fw={600} c="dimmed" tt="uppercase">
+                    <Text
+                      size="sm"
+                      fw={760}
+                      className="result-muted"
+                      tt="uppercase"
+                    >
                       Discount breakdown
                     </Text>
                     {result.breakdown.map((entry, index) => (
                       <Stack key={`${entry.label}-${index}`} gap={4}>
                         <Group justify="space-between" gap="xs">
                           <Text fw={600}>{entry.label}</Text>
-                          <Badge variant="light" color="blue" size="md">
+                          <span className="stat-chip">
                             {formatPercent(entry.rate)}
-                          </Badge>
+                          </span>
                         </Group>
                         <Text size="sm">
                           Savings: {currencyFormatter.format(entry.amount)}
                         </Text>
-                        <Text size="sm" c="dimmed">
+                        <Text size="sm" className="result-muted">
                           Subtotal after discount:{" "}
                           {currencyFormatter.format(entry.remaining)}
                         </Text>
@@ -280,7 +289,7 @@ export default function DiscountCalculatorPage() {
               ) : null}
             </>
           ) : (
-            <Text c="dimmed">
+            <Text className="quiet-text">
               Enter an original price greater than zero to see your savings.
             </Text>
           )}
