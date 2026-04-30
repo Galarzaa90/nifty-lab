@@ -55,6 +55,33 @@ a {
   min-height: 100vh;
 }
 
+.site-frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-frame > .app-shell {
+  flex: 1;
+  min-height: auto;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.1rem 0 1.25rem;
+}
+
+.site-footer-link {
+  color: var(--accent-strong);
+  font-weight: 680;
+  text-decoration: none;
+}
+
+.site-footer-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
 .directory-shell {
   display: grid;
   gap: 2rem;

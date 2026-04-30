@@ -1,6 +1,13 @@
 import "@mantine/core/styles.css";
 import type { Metadata } from "next";
-import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+import {
+  Anchor,
+  ColorSchemeScript,
+  Container,
+  MantineProvider,
+  Text,
+  createTheme,
+} from "@mantine/core";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -20,6 +27,8 @@ const theme = createTheme({
   fontFamily: "var(--font-geist-sans)",
   fontFamilyMonospace: "var(--font-geist-mono)",
 });
+
+const currentYear = new Date().getFullYear();
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +57,24 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <MantineProvider defaultColorScheme="dark" theme={theme}>
-          {children}
+          <div className="site-frame">
+            {children}
+            <footer className="site-footer">
+              <Container size="xl">
+                <Text size="sm" className="quiet-text">
+                  © {currentYear} Allan Galarza |{" "}
+                  <Anchor
+                    className="site-footer-link"
+                    href="https://github.com/Galarzaa90/nifty-lab"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    GitHub
+                  </Anchor>
+                </Text>
+              </Container>
+            </footer>
+          </div>
         </MantineProvider>
       </body>
     </html>
