@@ -144,9 +144,8 @@ export default function DiscountCalculatorPage() {
   }, [additionalDiscounts, originalPrice, primaryDiscount]);
 
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
-        <Text className="page-kicker">Checkout math</Text>
+      <Stack gap="xl">
+        <Stack gap="sm">
         <Title order={1} className="section-title">
           Discount calculator
         </Title>

@@ -7,9 +7,8 @@ import Link from "next/link";
 
 export default function CalculatorsIndex() {
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
-        <Text className="page-kicker">Tool library</Text>
+      <Stack gap="xl">
+        <Stack gap="sm">
         <Title order={1} className="section-title">
           Pick a calculator
         </Title>
@@ -38,7 +37,6 @@ export default function CalculatorsIndex() {
                     <Title order={3} size="1.35rem">
                       {calculator.name}
                     </Title>
-                    <Text className="meta-label">{calculator.eyebrow}</Text>
                   </Stack>
                 </Group>
                 <IconArrowRight size={20} stroke={1.8} />

@@ -513,9 +513,8 @@ export default function Home() {
   };
 
   return (
-    <Stack gap="xl">
-      <Stack gap="sm">
-        <Text className="page-kicker">Price comparison</Text>
+      <Stack gap="xl">
+        <Stack gap="sm">
         <Title order={1} className="section-title">
           Unit price calculator
         </Title>

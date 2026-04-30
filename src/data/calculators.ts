@@ -2,7 +2,6 @@ export type CalculatorMeta = {
   slug: string;
   name: string;
   shortDescription: string;
-  eyebrow: string;
   href: string;
 };
 
@@ -12,7 +11,6 @@ export const CALCULATORS: CalculatorMeta[] = [
     name: "Unit Price Calculator",
     shortDescription:
       "Compare product prices in different presentations to find the best offer.",
-    eyebrow: "Price comparison",
     href: "/calculators/unit-price",
   },
   {
@@ -20,7 +18,13 @@ export const CALCULATORS: CalculatorMeta[] = [
     name: "Discount Calculator",
     shortDescription:
       "Stack multiple discounts to see the real final price and total savings.",
-    eyebrow: "Checkout math",
     href: "/calculators/discount",
+  },
+  {
+    slug: "subscription-cost",
+    name: "Subscription Cost Calculator",
+    shortDescription:
+      "Compare weekly, monthly, and yearly subscriptions by their real annual cost.",
+    href: "/calculators/subscription-cost",
   },
 ];

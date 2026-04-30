@@ -134,15 +134,6 @@ a {
   width: 1.8rem;
 }
 
-.page-kicker {
-  color: var(--accent-strong);
-  font-size: 0.74rem;
-  font-weight: 780;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
 .page-title {
   color: var(--foreground);
   font-size: clamp(2.25rem, 7vw, 5.2rem);

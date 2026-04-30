@@ -42,7 +42,6 @@ function CalculatorLinks({
             onClick={onNavigate}
           >
             <Stack gap={8}>
-              <Text className="meta-label">{calculator.eyebrow}</Text>
               <Group justify="space-between" gap="xs" wrap="nowrap">
                 <Text fw={760}>{calculator.name}</Text>
                 <IconArrowRight size={16} stroke={1.8} />

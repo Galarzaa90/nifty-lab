@@ -40,12 +40,10 @@ export default function Home() {
             <span className="brand-mark">Nifty Lab</span>
             <Stack gap="lg" maw={760}>
               <Title order={1} className="page-title">
-                Tiny calculators for ordinary decisions.
+                Tiny calculators for every day.
               </Title>
               <Text className="lede">
-                A small collection of low-friction tools for checkout math,
-                grocery comparisons, and the little numbers that interrupt your
-                day.
+                A small collection of tools for your daily needs.
               </Text>
             </Stack>
 
@@ -70,10 +68,9 @@ export default function Home() {
                   >
                     <Stack gap="xs">
                       <Group justify="space-between" wrap="nowrap">
-                        <Text className="meta-label">{calculator.eyebrow}</Text>
+                        <Text fw={720}>{calculator.name}</Text>
                         <IconArrowRight size={17} stroke={1.8} />
                       </Group>
-                      <Text fw={720}>{calculator.name}</Text>
                       <Text size="sm" className="quiet-text">
                         {calculator.shortDescription}
                       </Text>
