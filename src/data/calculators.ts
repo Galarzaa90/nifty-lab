@@ -21,6 +21,13 @@ export const CALCULATORS: CalculatorMeta[] = [
     href: "/calculators/discount",
   },
   {
+    slug: "unit-conversion",
+    name: "Unit Conversion Calculator",
+    shortDescription:
+      "Convert quantities between compatible length, weight, volume, and area units.",
+    href: "/calculators/unit-conversion",
+  },
+  {
     slug: "subscription-cost",
     name: "Subscription Cost Calculator",
     shortDescription:
